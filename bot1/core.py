@@ -190,7 +190,7 @@ def _count_search_phrase(title: str, description: str, search_phrase: str) -> st
     tc = title.count(search_phrase)
     dc = description.count(search_phrase)
     logger.info(f'Number of times \'{search_phrase}\' was found in the: \n' 
-                'title: {tc} \n description: {dc}')
+                f'title: {tc} \n description: {dc}')
     return str(dc + tc)
 
 
