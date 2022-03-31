@@ -10,7 +10,7 @@ temp/
 */.ipynb_checkpoints/*
 .vscode
 .DS_Store
-*.pyc
+**.pyc
 *.zip
 .~lock*
 */work-items-out/*
@@ -19,6 +19,7 @@ temp/
 **.jpeg
 **.gif
 **.txt
-**.code-workspace
+**/*.code-workspace
 **/__pycache__/*
-.vscode/*
+**/.vscode/*
+devdata/
