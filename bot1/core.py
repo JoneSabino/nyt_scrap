@@ -27,7 +27,7 @@ def setup():
     excel.rename_worksheet('Sheet', 'News')
     excel.save_workbook()
     pl.new_browser(
-        headless=True,
+        headless=False,
     )
     pl.new_context(acceptDownloads=True)
 
@@ -74,6 +74,14 @@ def navigate():
     logger.info(f'Searching for {search_phrase} news')
     pl.click(go_button)
 
+    # input the date range
+    pl.click(date_range_button)
+    pl.click(spec_date_opt)
+    date_range = _set_date_range()
+    pl.fill_text(start_date_field, date_range['start'])
+    pl.fill_text(end_date_field, date_range['end'])
+    pl.click('#searchTextField')
+    
     # select a news category or section
     pl.click(section_button)
     try:
@@ -86,13 +94,6 @@ def navigate():
     # remove the GDPR banner
     pl.click(accept_cookies)
 
-    # input the date range
-    pl.click(date_range_button)
-    pl.click(spec_date_opt)
-    date_range = _set_date_range()
-    pl.fill_text(start_date_field, date_range['start'])
-    pl.fill_text(end_date_field, date_range['end'])
-    pl.click('#searchTextField')
 
     # choose the latest news
     pl.select_options_by(sort_button, SelectAttribute['value'], 'newest')
