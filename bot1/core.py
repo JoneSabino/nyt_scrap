@@ -8,7 +8,6 @@ from RPA.FileSystem import FileSystem
 from Browser import ElementState, SelectAttribute
 from typing import Dict, Union
 from loguru import logger
-import os
 
 wb_path = r'./output/news.xlsx'
 
