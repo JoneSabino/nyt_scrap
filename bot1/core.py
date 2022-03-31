@@ -202,7 +202,7 @@ def _money_exists(title: str, description: str) -> bool:
 
     title_money = money_pattern.findall(title)
     description_money = money_pattern.findall(description)
-    logger.info(f'Money in title: {title_money[0][0]} \n Money in description: {description_money[0][0]}')
+    logger.info(f'Money in title: {title_money} \n Money in description: {description_money}')
     return True if title_money or description_money else False
 
 
