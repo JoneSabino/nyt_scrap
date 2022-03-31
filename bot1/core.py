@@ -156,8 +156,8 @@ def get_news_info():
         data['Has Money'] = _money_exists(data['Title'], data['Description'])
 
         _write_to_excel(data, 'News')
-
     pl.set_browser_timeout(10)
+    wi.create_output_work_item(files=wb_path, save=True)
 
 
 def _set_date_range() -> Dict[str, str]:
@@ -242,8 +242,11 @@ def _download_picture(picture_url: str):
     """Download the picture"""
     logger.info(f'Downloading picture: {picture_url}')
     pl.set_browser_timeout(10)
-    img = pl.download(picture_url)
-    file_extension = img['suggestedFilename'].split('.')[-1]
-    fs.change_file_extension(f'{img["saveAs"]}', f'.{file_extension}')
-    logger.info(f'Picture downloaded with success')
+    try:
+        img = pl.download(picture_url)
+        file_extension = img['suggestedFilename'].split('.')[-1]
+        fs.change_file_extension(f'{img["saveAs"]}', f'.{file_extension}')
+        logger.info(f'Picture downloaded with success')
+    except AssertionError:
+        logger.warning('Too much time waiting. Download Canceled')
     pl.set_browser_timeout(1)
