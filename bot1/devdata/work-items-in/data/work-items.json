@@ -1,0 +1,11 @@
+[
+  {
+      "payload": {
+         "search_phrase": "robotics",
+         "news_section": "Technology",
+         "months": 3
+      },
+      "files": {
+      }
+  }
+]
