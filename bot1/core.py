@@ -63,6 +63,7 @@ def navigate():
 
     # Open the site by following the link
     pl.set_browser_timeout(30)
+    logger.info('Opening https://nytimes.com')
     pl.new_page('https://nytimes.com')
     pl.set_browser_timeout(10)
 
@@ -70,6 +71,7 @@ def navigate():
     pl.click(search_icon)
     pl.wait_for_elements_state(search_field, ElementState(4), timeout=10)
     pl.type_text(search_field, search_phrase)
+    logger.info(f'Searching for {search_phrase} news')
     pl.click(go_button)
 
     # select a news category or section
@@ -176,7 +178,7 @@ def _set_date_range() -> Dict[str, str]:
     else:
         date = today - relativedelta(months=date_range)
         start_date = date.strftime('%m/%d/%Y')
-    logger.info(f'Start date: {start_date} \n End date: {end_date}')
+    logger.info(f'Searching news from {start_date} to {end_date}')
     return {'start': start_date, 'end': end_date}
 
 
@@ -187,7 +189,8 @@ def _count_search_phrase(title: str, description: str, search_phrase: str) -> st
     # Check if the search phrase is in the title or description
     tc = title.count(search_phrase)
     dc = description.count(search_phrase)
-    logger.info(f'{search_phrase} in title: {tc} \n {search_phrase} in description: {dc}')
+    logger.info(f'Number of times \'{search_phrase}\' was found in the: \n' 
+                'title: {tc} \n description: {dc}')
     return str(dc + tc)
 
 
@@ -199,7 +202,7 @@ def _money_exists(title: str, description: str) -> bool:
 
     title_money = money_pattern.findall(title)
     description_money = money_pattern.findall(description)
-    logger.info(f'Money in title: {title_money} \n Money in description: {description_money}')
+    logger.info(f'Money in title: {title_money[0][0]} \n Money in description: {description_money[0][0]}')
     return True if title_money or description_money else False
 
 
