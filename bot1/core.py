@@ -241,7 +241,9 @@ def _get_picture_metadata(news: str) -> Dict[str, str]:
 def _download_picture(picture_url: str):
     """Download the picture"""
     logger.info(f'Downloading picture: {picture_url}')
+    pl.set_browser_timeout(10)
     img = pl.download(picture_url)
     file_extension = img['suggestedFilename'].split('.')[-1]
     fs.change_file_extension(f'{img["saveAs"]}', f'.{file_extension}')
     logger.info(f'Picture downloaded with success')
+    pl.set_browser_timeout(1)
