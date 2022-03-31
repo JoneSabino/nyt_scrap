@@ -1,4 +1,5 @@
 import re
+import os
 import datetime
 from dateutil.relativedelta import relativedelta
 from RPA.Browser.Playwright import Playwright
@@ -26,8 +27,10 @@ def setup():
     excel.create_workbook(wb_path)
     excel.rename_worksheet('Sheet', 'News')
     excel.save_workbook()
+    root_dir = os.getcwd()
     pl.new_browser(
         headless=False,
+        downloadsPath=f'{root_dir}/output/downloads'
     )
     pl.new_context(acceptDownloads=True)
 
